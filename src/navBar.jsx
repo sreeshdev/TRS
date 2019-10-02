@@ -25,7 +25,7 @@ export default function ButtonAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            TRS
+            TRM
           </Typography>
           <Button color="inherit" href="/login">
             Login
