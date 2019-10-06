@@ -24,6 +24,13 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
 import Icon from "@material-ui/core/Icon";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SaveIcon from "@material-ui/icons/Save";
@@ -49,6 +56,28 @@ const StyledTableRow = withStyles(theme => ({
 
 const useStyles = makeStyles(theme => ({
   root: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  formControl: {
+    margin: theme.spacing(2),
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200
+  },
+  button: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 100
+  },
+  root: {
+    display: "flex",
     alignItems: "right",
     justifyContent: "right",
     flexWrap: "wrap"
@@ -118,6 +147,13 @@ export default function CustomSeparator() {
     reason: ""
   });
 
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date("2014-08-18T21:11:54")
+  );
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
   //   React.useEffect(() => {
@@ -148,12 +184,9 @@ export default function CustomSeparator() {
         <br></br>
         <br></br>
         <center>
-          <Typography color="textPrimary">
-            Back Office Bill Generation
-          </Typography>
           <form className={classes.root} autoComplete="off">
-            <FormControl className={classes.formControl}>
-              <InputLabel shrink htmlFor="subdiv-label-placeholder" required>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel ref={inputLabel} htmlFor="outlined-age-simple">
                 Sub Division
               </InputLabel>
               <Select
@@ -167,16 +200,13 @@ export default function CustomSeparator() {
                 name="subdiv"
                 className={classes.selectEmpty}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
                 <MenuItem value={10}>Shikaripura</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
-            <FormControl className={classes.formControl}>
-              <InputLabel shrink htmlFor="mob-label-placeholder" required>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel ref={inputLabel} htmlFor="outlined-age-simple">
                 Month of Bill
               </InputLabel>
               <Select
@@ -190,9 +220,6 @@ export default function CustomSeparator() {
                 name="mob"
                 className={classes.selectEmpty}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
                 <MenuItem value={10}>Sep-2017</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
@@ -289,17 +316,21 @@ export default function CustomSeparator() {
                 variant="outlined"
                 required
               />
-              <TextField
-                id="date"
-                label="Last Bill Issued"
-                type="date"
-                defaultValue=""
-                className={classes.textField}
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="Date picker inline"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date"
+                  }}
+                />
+              </MuiPickersUtilsProvider>
 
               <br></br>
               <TextField
@@ -319,17 +350,21 @@ export default function CustomSeparator() {
                 variant="outlined"
                 required
               />
-              <TextField
-                id="date"
-                label="Due Date"
-                type="date"
-                defaultValue=""
-                className={classes.textField}
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="Date picker inline"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date"
+                  }}
+                />
+              </MuiPickersUtilsProvider>
 
               <br></br>
               <TextField
@@ -349,17 +384,21 @@ export default function CustomSeparator() {
                 variant="outlined"
                 required
               />
-              <TextField
-                id="date"
-                label="Reading Date"
-                type="date"
-                defaultValue=""
-                className={classes.textField}
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="Date picker inline"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date"
+                  }}
+                />
+              </MuiPickersUtilsProvider>
               <br></br>
               <TextField
                 required
@@ -467,10 +506,129 @@ export default function CustomSeparator() {
                     <StyledTableCell>Wheeled</StyledTableCell>
                   </TableRow>
                 </TableHead>
+                <TableBody>
+                  <StyledTableRow>
+                    <StyledTableCell component="th" scope="row">
+                      KWH
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label=""
+                        defaultValue="0.0"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label=""
+                        defaultValue="0.0"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label=""
+                        defaultValue="0.0"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                  <StyledTableRow>
+                    <StyledTableCell component="th" scope="row">
+                      KVAH
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label=""
+                        defaultValue="0.0"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label=""
+                        defaultValue="0.0"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label=""
+                        defaultValue="0.0"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                  <StyledTableRow>
+                    <StyledTableCell component="th" scope="row">
+                      LT
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label=""
+                        defaultValue="0.0"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label=""
+                        defaultValue="0.0"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label=""
+                        defaultValue="0.0"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                      />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                </TableBody>
               </Table>
             </Paper>
+
             <br></br>
-            <div className={classes.coloumn}>
+
+            <div>
+              <br></br>
               <form className={classes.container} noValidate autoComplete="off">
                 <br></br>
                 <TextField
@@ -483,6 +641,7 @@ export default function CustomSeparator() {
                   variant="outlined"
                 />
                 <TextField
+                  required
                   id="outlined-dense-multiline"
                   label="Power Factor"
                   className={classes.textField}
@@ -531,6 +690,224 @@ export default function CustomSeparator() {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={classes.details}>
             <div className={classes.column} />
+            <Table className={classes.table}>
+              <TableBody>
+                <StyledTableRow>
+                  <StyledTableCell component="th" scope="row">
+                    Billing Charges
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Fixed Charges"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="Energy Charges"
+                      label="Energy Charges"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="LTEC"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="FAC"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Excess Demand"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="PF Penalty"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCell component="th" scope="row">
+                    Discount
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="GOK Discount"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Customer Discount"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCell component="th" scope="row">
+                    Other Charges
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Tax"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Other Charges"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCell component="th" scope="row">
+                    Withdrawal Amount
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Customer"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="GOK"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCell component="th" scope="row">
+                    Arrears
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Revenue Arrears"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Interest Arrears"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Tax Arrears"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="GOK Arrears"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCell component="th" scope="row">
+                    Interest
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Revenue Interest"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Tax Interest"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="GOK Rev Interest"
+                      defaultValue=""
+                      className={classes.textField}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+              </TableBody>
+            </Table>
+            <br></br>
             <form className={classes.container} noValidate autoComplete="off">
               <TextField
                 required
