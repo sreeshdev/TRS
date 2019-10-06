@@ -78,8 +78,8 @@ const useStyles = makeStyles(theme => ({
   },
   root: {
     display: "flex",
-    alignItems: "right",
-    justifyContent: "right",
+    alignItems: "left",
+    justifyContent: "left",
     flexWrap: "wrap"
   },
   formControl: {
@@ -90,8 +90,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2)
   },
   paper: {
-    alignItems: "right",
-    justifyContent: "right",
+    alignItems: "left",
+    justifyContent: "left",
     padding: theme.spacing(1, 2)
   },
   root: {
@@ -110,10 +110,10 @@ const useStyles = makeStyles(theme => ({
     width: 20
   },
   details: {
-    alignItems: "center"
+    alignItems: "left"
   },
   column: {
-    flexBasis: "33.33%"
+    // flexBasis: "15.33%"
   },
   helper: {
     borderLeft: `2px solid ${theme.palette.divider}`,
@@ -156,9 +156,6 @@ export default function CustomSeparator() {
   };
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
-  //   React.useEffect(() => {
-  //     setLabelWidth(inputLabel.current.offsetWidth);
-  //   }, []);
 
   const handleChange = event => {
     setValues(oldValues => ({
@@ -254,6 +251,15 @@ export default function CustomSeparator() {
                 variant="outlined"
               />
               <TextField
+                required
+                id="outlined-required"
+                label="RRNO"
+                defaultValue=""
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+              />
+              <TextField
                 id="outlined-dense-multiline"
                 label="Name & Address"
                 className={classes.textField}
@@ -264,15 +270,6 @@ export default function CustomSeparator() {
               />
 
               <br></br>
-              <TextField
-                required
-                id="outlined-required"
-                label="RRNO"
-                defaultValue=""
-                className={classes.textField}
-                margin="normal"
-                variant="outlined"
-              />
             </form>
           </ExpansionPanelDetails>
           <Divider />
@@ -322,8 +319,8 @@ export default function CustomSeparator() {
                   variant="inline"
                   format="MM/dd/yyyy"
                   margin="normal"
-                  id="date-picker-inline"
-                  label="Date picker inline"
+                  id="Last-Issue-Date"
+                  label="Last Issue Date"
                   value={selectedDate}
                   onChange={handleDateChange}
                   KeyboardButtonProps={{
@@ -356,8 +353,8 @@ export default function CustomSeparator() {
                   variant="inline"
                   format="MM/dd/yyyy"
                   margin="normal"
-                  id="date-picker-inline"
-                  label="Date picker inline"
+                  id="due-date"
+                  label="Due Date"
                   value={selectedDate}
                   onChange={handleDateChange}
                   KeyboardButtonProps={{
@@ -390,8 +387,8 @@ export default function CustomSeparator() {
                   variant="inline"
                   format="MM/dd/yyyy"
                   margin="normal"
-                  id="date-picker-inline"
-                  label="Date picker inline"
+                  id="reading-date"
+                  label="Reading Date"
                   value={selectedDate}
                   onChange={handleDateChange}
                   KeyboardButtonProps={{
@@ -696,7 +693,7 @@ export default function CustomSeparator() {
                   <StyledTableCell component="th" scope="row">
                     Billing Charges
                   </StyledTableCell>
-                  <StyledTableCell align="right">
+                  <StyledTableCell align="left">
                     <TextField
                       required
                       id="outlined-required"
@@ -757,7 +754,7 @@ export default function CustomSeparator() {
                   <StyledTableCell component="th" scope="row">
                     Discount
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell align="left">
                     <TextField
                       required
                       id="outlined-required"
@@ -782,7 +779,7 @@ export default function CustomSeparator() {
                   <StyledTableCell component="th" scope="row">
                     Other Charges
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell align="left">
                     <TextField
                       required
                       id="outlined-required"
@@ -807,7 +804,7 @@ export default function CustomSeparator() {
                   <StyledTableCell component="th" scope="row">
                     Withdrawal Amount
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell align="left">
                     <TextField
                       required
                       id="outlined-required"
@@ -832,7 +829,7 @@ export default function CustomSeparator() {
                   <StyledTableCell component="th" scope="row">
                     Arrears
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell align="left">
                     <TextField
                       required
                       id="outlined-required"
@@ -875,7 +872,7 @@ export default function CustomSeparator() {
                   <StyledTableCell component="th" scope="row">
                     Interest
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell align="left">
                     <TextField
                       required
                       id="outlined-required"
